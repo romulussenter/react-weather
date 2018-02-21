@@ -4,14 +4,22 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+       <h1>React Weather</h1>
+       <p>Enter your latitude and longitude to get the weather!</p>
+       <form>
+         <label>
+           Latitude
+           <input type="text"></input>
+
+         </label>
+         <label>
+           Longitude
+           <input type="text"></input>
+           
+         </label>
+         <button type='submite'>Get The Weather</button>
+       </form>
       </div>
     );
   }
