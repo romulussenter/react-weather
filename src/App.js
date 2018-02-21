@@ -32,12 +32,20 @@ class App extends Component {
        <form>
          <label>
            Latitude
-           <input type="text" onChange={(e) => this.handleLatChange(e)}  value={this.state.lat}></input>
+           <input type="number"
+           min='-90'
+           max='90'
+            onChange={(e) => this.handleLatChange(e)}  value={this.state.lat}
+            required></input>
 
          </label>
          <label>
            Longitude
-           <input type="text" onChange={(e) => this.handleLonChange(e)}  value={this.state.lon}></input>
+           <input type="number"
+           min='-180'
+           max='180'
+            onChange={(e) => this.handleLonChange(e)}  value={this.state.lon}
+            required></input>
            
          </label>
          <button type='submit'>Get The Weather</button>
