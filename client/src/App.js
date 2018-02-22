@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import {getWeather} from './Services/Weather';
+
 
 class App extends Component {
   constructor(){
@@ -7,6 +9,7 @@ class App extends Component {
       this.state ={
         lat: 0,
         lon: 0,
+        currentWeather: {}
       };
       this.handleLatChange =this.handleLatChange.bind(this);
       this.handleLonChange = this.handleLonChange.bind(this);
@@ -27,9 +30,18 @@ class App extends Component {
   handleSubmit(e){
     e.preventDefault();
     console.log('this is the stuff');
-  }
-
-
+    getWeather(this.state.lat, this.state.lon)
+    .then(response => {
+    const currentWeather = response.data.currently;
+    this.setState({
+      currentWeather: currentWeather
+    
+    }); 
+  })
+  .catch(error=> {
+    console.error(error);
+  });
+}
   render() {
     return (
       <div>
@@ -56,6 +68,9 @@ class App extends Component {
          </label>
          <button type='submit'>Get The Weather</button>
        </form>
+       <per>
+         {JSON.stringify(this.state.currentWeather, null, 4)}
+       </per>
       </div>
     );
   }

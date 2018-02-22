@@ -10,7 +10,7 @@ console.log(API_KEY);
 const serverApp =express();
 const port = process.env.PORT || 5000;
 
-serverApp.get('/forcast/:lat,:lon', function(request, response){
+serverApp.get('/forecast/:lat,:lon', function(request, response){
     const { lat, lon} = request.params;
     const url =`https://api.darksky.net/forecast/${API_KEY}/${lat},${lon}`
     axios.get(url)
