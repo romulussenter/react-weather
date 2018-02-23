@@ -13,7 +13,8 @@ class App extends Component {
       this.state ={
         lat: 0,
         lon: 0,
-        currentWeather: {}
+        currentWeather: {},
+        error: null
       };
       this.handleLatChange =this.handleLatChange.bind(this);
       this.handleLonChange = this.handleLonChange.bind(this);
@@ -43,10 +44,18 @@ class App extends Component {
     }); 
   })
   .catch(error=> {
-    console.error(error);
+    console.log(error);
+    this.setState({
+      error: 'Something is broken'
+    });
   });
 }
   render() {
+    if(this.state.error){
+      return(
+        <h1>{this.state.error}</h1>
+      )
+    }
     return (
       <div>
        <h1>React Weather</h1>
@@ -72,7 +81,7 @@ class App extends Component {
          </label>
          <button type='submit'>Get The Weather</button>
        </form>
-      
+      {this.state.error ? <h1>{this.state.error}</h1> : ''}
       { isEmptyObject(this.state.currentWeather) ? 
        "" :
        <CurrentWeather {...this.state.currentWeather}/>}
