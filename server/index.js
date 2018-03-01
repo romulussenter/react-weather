@@ -1,4 +1,5 @@
 //import
+const path = require('path')
 const express = require('express');
 const axios = require('axios');
 
@@ -9,6 +10,11 @@ console.log(API_KEY);
 //creation of stuff
 const serverApp =express();
 const port = process.env.PORT || 5000;
+
+
+//middleware (powerups)
+
+serverApp.use(express.static('client/build'));
 
 serverApp.get('/forecast/:lat,:lon', function(request, response){
     const { lat, lon} = request.params;
@@ -22,6 +28,10 @@ serverApp.get('/forecast/:lat,:lon', function(request, response){
             msg:'Your stuff is broked.'
         });
     });
+});
+//This serves the finished react app.
+serverApp.get('*', (request, response) =>{
+    response.sendFile('index.html', {root: path.resolve('client/build') });
 });
 
 serverApp.listen(port, () => {
